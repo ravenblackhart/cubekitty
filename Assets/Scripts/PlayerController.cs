@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerInput)), RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     #region Inspector
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public InputAction MoveBack;
     public InputAction Attack;
 
+    protected Vector3 moveDirection = Vector3.zero;
+
     //Private Declarations
     private bool isMoving;
 
@@ -32,17 +34,16 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving) return;
 
-
-        if (MoveLeft.triggered) OnLeft();
-        
-        else if (MoveRight.triggered) OnRight();
-        
-        else if (MoveForward.triggered) OnForward();
-        
-        else if (MoveBack.triggered) OnBackward();
+   
+        // if (MoveLeft.triggered) OnLeft();
+        //
+        // else if (MoveRight.triggered) OnRight();
+        //
+        // else if (MoveForward.triggered) OnForward();
+        //
+        // else if (MoveBack.triggered) OnBackward();
         
         else if (Attack.triggered) OnAttack();
-
         
     }
 
