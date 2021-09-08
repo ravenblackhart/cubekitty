@@ -1,9 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput)), RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     #region Inspector
@@ -17,65 +16,31 @@ public class PlayerController : MonoBehaviour
     #region Other Declarations
     
     //Public Declarations
-    public InputAction MoveLeft;
-    public InputAction MoveRight;
-    public InputAction MoveForward;
-    public InputAction MoveBack;
-    public InputAction Attack;
-
-    protected Vector3 moveDirection = Vector3.zero;
 
     //Private Declarations
     private bool isMoving;
 
     #endregion
-
+    
     void FixedUpdate()
     {
         if (isMoving) return;
-
-   
-        // if (MoveLeft.triggered) OnLeft();
-        //
-        // else if (MoveRight.triggered) OnRight();
-        //
-        // else if (MoveForward.triggered) OnForward();
-        //
-        // else if (MoveBack.triggered) OnBackward();
         
-        else if (Attack.triggered) OnAttack();
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.left);
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) OnMove(Vector3.right);
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) OnMove(Vector3.forward);
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) OnMove(Vector3.back);
+
         
-    }
+        void OnMove(Vector3 moveDirection)
+        {
+            var newAnchor = transform.position + (Vector3.down + moveDirection) * 0.5f;
+            var rotAxis = Vector3.Cross(Vector3.up, moveDirection);
+            StartCoroutine(Roll(newAnchor, rotAxis ));
+        }
 
-    #region Movements
+        //else if (Attack.triggered) OnAttack();
 
-    
-    void OnForward()
-    {
-        var newAnchor = transform.position + new Vector3(0, -0.5f, 0.5f);
-        var rotAxis = Vector3.Cross(Vector3.up, Vector3.forward);
-        StartCoroutine(Roll(newAnchor, rotAxis ));
-    }
-    
-    void OnLeft()
-    {
-        var newAnchor = transform.position + new Vector3(-0.5f, -0.5f, 0);
-        var rotAxis = Vector3.Cross(Vector3.up, Vector3.left);
-        StartCoroutine(Roll(newAnchor, rotAxis ));
-    }
-    
-    void OnRight()
-    {
-        var newAnchor = transform.position + new Vector3(0.5f, -0.5f, 0);
-        var rotAxis = Vector3.Cross(Vector3.up, Vector3.right);
-        StartCoroutine(Roll(newAnchor, rotAxis ));
-    }
-    
-    void OnBackward()
-    {
-        var newAnchor = transform.position + new Vector3(0, -0.5f, -0.5f);
-        var rotAxis = Vector3.Cross(Vector3.up, Vector3.back);
-        StartCoroutine(Roll(newAnchor, rotAxis ));
     }
 
     void OnAttack()
@@ -95,8 +60,5 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         
     }
-    
-    #endregion
-
 
 }
