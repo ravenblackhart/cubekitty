@@ -524,8 +524,8 @@ MonoBehaviour:
   rollSpeed: 3
   MoveLeft:
     m_Name: Move Left
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: d23787cc-9ac2-475d-a155-b0d662e6f7b3
     m_Processors: 
     m_Interactions: 
@@ -559,14 +559,6 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: ac851085-48b0-4f9a-803b-31b67ff0b3a7
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-  Move:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
