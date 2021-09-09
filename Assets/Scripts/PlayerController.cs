@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     //Private Declarations
     private bool isMoving;
+    private bool onCollectMarble;
 
     #endregion
     
@@ -60,5 +61,17 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         
     }
+
+    #region Marbles
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Marble")
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    #endregion
 
 }
