@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
 
     //Private Declarations
     private bool isMoving;
-    private bool onCollectMarble;
+    private Marbles marbles;
 
     #endregion
     
+
     void FixedUpdate()
     {
         if (isMoving) return;
@@ -68,7 +69,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag == "Marble")
         {
-            Destroy(other.gameObject);
+            marbles = GetComponent<Marbles>();
+            marbles.Collect();
         }
     }
 
