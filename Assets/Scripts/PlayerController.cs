@@ -7,7 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     #region Inspector
 
+    [SerializeField] protected float HP = 3f;
+    
     [SerializeField] private float rollSpeed = 1f;
+    
+    
 
     
 
@@ -20,6 +24,8 @@ public class PlayerController : MonoBehaviour
     //Private Declarations
     private bool isMoving;
     private Marbles marbles;
+
+    public bool isFaceUp;
 
     #endregion
     
@@ -39,9 +45,21 @@ public class PlayerController : MonoBehaviour
             var newAnchor = transform.position + (Vector3.down + moveDirection) * 0.5f;
             var rotAxis = Vector3.Cross(Vector3.up, moveDirection);
             StartCoroutine(Roll(newAnchor, rotAxis ));
+            if (transform.rotation.x == 0 && transform.rotation.z == 0)
+            {
+                isFaceUp = true;
+                Debug.Log("mia!");
+            }
+
+            else
+            {
+                isFaceUp = false;
+            }
         }
 
         //else if (Attack.triggered) OnAttack();
+
+       
 
     }
 
@@ -60,20 +78,8 @@ public class PlayerController : MonoBehaviour
         }
 
         isMoving = false;
-        
     }
 
-    #region Marbles
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "Marble")
-        {
-            marbles = GetComponent<Marbles>();
-            marbles.Collect();
-        }
-    }
-
-    #endregion
+    
 
 }
