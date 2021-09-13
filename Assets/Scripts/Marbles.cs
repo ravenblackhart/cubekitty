@@ -12,7 +12,7 @@ public class Marbles : MonoBehaviour
     private float Offset;
 
     private Rigidbody rigidBody;
-    private UIController _uiController;
+    private PlayerController playerController;
 
     private bool isHit = false;
 
@@ -20,7 +20,7 @@ public class Marbles : MonoBehaviour
     {
         Offset = Random.Range(0.1f,0.3f);
         rigidBody = GetComponent<Rigidbody>();
-        _uiController = GameObject.Find("GameController").GetComponent<UIController>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void FixedUpdate()
@@ -58,7 +58,7 @@ public class Marbles : MonoBehaviour
 
     public IEnumerator Collect()
     {
-        _uiController.Marbles++;
+        playerController.Marbles++;
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }

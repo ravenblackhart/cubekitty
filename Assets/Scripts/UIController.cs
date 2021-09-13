@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +11,6 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     #region GUI
-    public int HealthPoints = 5;
-    public int Marbles = 5;
 
     [Header("HUD Components")] 
     public TextMeshProUGUI HealthCounter;
@@ -20,9 +19,9 @@ public class UIController : MonoBehaviour
     [Header("Menus & Buttons")] 
     [SerializeField] public Button PauseButton;
     [SerializeField] public Button ResumeButton;
-    [SerializeField] public Button RestartButton;
     [SerializeField] public Button MainMenuButton;
-    
+    [SerializeField] public Button RestartButton;
+
     [SerializeField] public GameObject PauseMenu;
     [SerializeField] public GameObject GameOverMenu;
     
@@ -30,23 +29,27 @@ public class UIController : MonoBehaviour
 
     #region Other Declaration
 
+    private PlayerController playerController;
 
 
     #endregion
-    private void Awake()
-    {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
-        if (objs.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
-        
-        DontDestroyOnLoad(gameObject);
-    }
+    // private void Awake()
+    // {
+    //     GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
+    //     if (objs.Length > 1)
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    //     
+    //     DontDestroyOnLoad(gameObject);
+    // }
 
     void Start()
     {
+        Time.timeScale = 1.0f;
         PauseMenu.SetActive(false);
+        GameOverMenu.SetActive(false);
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         
         //Adding Listeners
         MainMenuButton.onClick.AddListener(MainMenu);
@@ -58,12 +61,12 @@ public class UIController : MonoBehaviour
 
    void Update()
     {
-        HealthCounter.text = HealthPoints.ToString();
-        MarblesCounter.text = Marbles.ToString();
+        HealthCounter.text = playerController.HealthPoints.ToString();
+        MarblesCounter.text = playerController.Marbles.ToString();
         
-        if (HealthPoints == 0)
+        if (playerController.HealthPoints == 0)
         {
-            Debug.Log("Oh no am ded!");
+            GameOverMenu.SetActive(true);
         }
 
 

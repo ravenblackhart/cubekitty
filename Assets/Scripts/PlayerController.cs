@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float rollSpeed = 1f;
     
+    public int HealthPoints = 5;
+    public int Marbles = 5;
+    
     
 
     
