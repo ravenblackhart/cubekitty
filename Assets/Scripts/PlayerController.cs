@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(2))
         {
-            if (transform.rotation.x == 0 && transform.rotation.z == 0 && !isAttacking)
+            if (playerPrefab.transform.up == Vector3.up )
             {
                 StartCoroutine(OnAttack());
             }
@@ -84,14 +85,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    IEnumerator OnAttack()
-    {
-        isAttacking = true;
-        Debug.Log("Meow!");
-        yield return new WaitForSeconds(0.3f);
-        isAttacking = false;
-    }
-
     IEnumerator Roll(Vector3 newAnchor, Vector3 rotAxis)
     {
         isMoving = true;
@@ -102,6 +95,20 @@ public class PlayerController : MonoBehaviour
         }
 
         isMoving = false;
+    }
+    
+    IEnumerator OnAttack()
+    {
+        isAttacking = true;
+        Debug.Log("Meow!");
+        yield return new WaitForSeconds(0.3f);
+        isAttacking = false;
+    }
+
+    IEnumerator OnDead()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(playerPrefab);
     }
 
     
