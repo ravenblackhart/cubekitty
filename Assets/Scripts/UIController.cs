@@ -21,6 +21,9 @@ public class UIController : MonoBehaviour
     [SerializeField] public Button ResumeButton;
     [SerializeField] public Button MainMenuButton;
     [SerializeField] public Button RestartButton;
+    
+    [SerializeField] public Button GOMainMenuButton;
+    [SerializeField] public Button GORestartButton;
 
     [SerializeField] public GameObject PauseMenu;
     [SerializeField] public GameObject GameOverMenu;
@@ -56,6 +59,8 @@ public class UIController : MonoBehaviour
         PauseButton.onClick.AddListener(PauseGame);
         ResumeButton.onClick.AddListener(ResumeGame);
         RestartButton.onClick.AddListener(RestartLevel);
+        GOMainMenuButton.onClick.AddListener(MainMenu);
+        GORestartButton.onClick.AddListener(RestartLevel);
 
     }
 
