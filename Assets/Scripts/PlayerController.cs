@@ -58,7 +58,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !isAttacking) StartCoroutine(OnAttack());
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(2))
+        {
+            if (transform.rotation.x == 0 && transform.rotation.z == 0 && !isAttacking)
+            {
+                StartCoroutine(OnAttack());
+            }
+
+            else
+            {
+                Debug.Log("Can't Attack");
+                isAttacking = false;
+            }
+        }
 
        
 
