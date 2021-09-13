@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+public class UIController : MonoBehaviour
 {
     #region GUI
     public int HealthPoints = 5;
@@ -26,6 +27,12 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject GameOverMenu;
     
     #endregion
+
+    #region Other Declaration
+
+
+
+    #endregion
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
@@ -39,6 +46,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        PauseMenu.SetActive(false);
+        
         //Adding Listeners
         MainMenuButton.onClick.AddListener(MainMenu);
         PauseButton.onClick.AddListener(PauseGame);
@@ -51,7 +60,7 @@ public class GameController : MonoBehaviour
     {
         HealthCounter.text = HealthPoints.ToString();
         MarblesCounter.text = Marbles.ToString();
-
+        
         if (HealthPoints == 0)
         {
             Debug.Log("Oh no am ded!");
@@ -64,22 +73,25 @@ public class GameController : MonoBehaviour
 
    void PauseGame()
    {
-       if (PauseMenu != isActiveAndEnabled)
+      
+       if (!PauseMenu.activeSelf)
        {
+           Debug.Log("Pausing");
            PauseMenu.SetActive(true);
            Time.timeScale = 0.0f;
        }
 
-       else
+       else if (PauseMenu.activeSelf)
        {
-           ResumeGame();
+          ResumeGame();
        }
    }
 
    void ResumeGame()
    {
-       Time.timeScale = 1.0f;
+       Debug.Log("Resuming");
        PauseMenu.SetActive(false);
+       Time.timeScale = 1.0f;
    }
 
    void MainMenu()
@@ -89,7 +101,7 @@ public class GameController : MonoBehaviour
 
    void RestartLevel()
    {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
    }
 
    #endregion

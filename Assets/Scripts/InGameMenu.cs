@@ -10,7 +10,7 @@ using Button = UnityEngine.UI.Button;
 
 public class InGameMenu : MonoBehaviour
 {
-    private GameController gameController;
+    private UIController _uiController;
     
     private Button m_pauseButton;
     private Button m_resumeButton;
@@ -22,18 +22,18 @@ public class InGameMenu : MonoBehaviour
     
     private void Awake()
     {
-        gameController = FindObjectOfType<GameController>();
+        _uiController = FindObjectOfType<UIController>();
     }
 
     void Start()
     {
-        m_pauseButton = gameController.PauseButton;
-        m_resumeButton = gameController.ResumeButton;
-        m_mainmenuButton = gameController.MainMenuButton;
-        m_restartButton = gameController.RestartButton;
+        m_pauseButton = _uiController.PauseButton;
+        m_resumeButton = _uiController.ResumeButton;
+        m_mainmenuButton = _uiController.MainMenuButton;
+        m_restartButton = _uiController.RestartButton;
 
-        pauseMenu = gameController.PauseMenu;
-        gameoverMenu = gameController.GameOverMenu;
+        pauseMenu = _uiController.PauseMenu;
+        gameoverMenu = _uiController.GameOverMenu;
         
         //Adding Listeners
         m_mainmenuButton.onClick.AddListener(MainMenu);

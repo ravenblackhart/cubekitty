@@ -6,13 +6,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Rigidbody rigidBody;
-    private GameController gameController;
+    private UIController _uiController;
 
     private bool isHit = false;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _uiController = GameObject.Find("GameController").GetComponent<UIController>();
     }
     
     void FixedUpdate()
@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator Attacking()
     {
-        gameController.HealthPoints--;
+        _uiController.HealthPoints--;
         yield return new WaitForSeconds(0.3f);
         isHit = false;
     }
