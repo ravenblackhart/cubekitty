@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     #region Inspector
 
-    [SerializeField] protected float HP = 3f;
-    
-    [SerializeField] private float rollSpeed = 1f;
-    
+    [SerializeField] private GameObject playerPrefab;
     public int HealthPoints = 5;
     public int Marbles = 5;
+
+    [Header("Movement")]
+    [SerializeField] private float rollSpeed = 1f;
+    
+    
     
     
 
@@ -75,7 +77,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       
+        if (HealthPoints == 0)
+        {
+            Destroy(playerPrefab);
+        }
 
     }
 
