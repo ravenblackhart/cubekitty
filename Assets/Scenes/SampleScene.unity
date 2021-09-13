@@ -2852,7 +2852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 3
-  rollSpeed: 1
+  rollSpeed: 3
   HealthPoints: 5
   Marbles: 5
 --- !u!1 &1696031604
