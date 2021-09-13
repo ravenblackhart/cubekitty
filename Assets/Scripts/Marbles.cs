@@ -12,11 +12,15 @@ public class Marbles : MonoBehaviour
     private float Offset;
 
     private Rigidbody rigidBody;
+    private GameController gameController;
+
+    private bool isHit = false;
 
     private void Start()
     {
         Offset = Random.Range(0.1f,0.3f);
         rigidBody = GetComponent<Rigidbody>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     void FixedUpdate()
@@ -44,15 +48,18 @@ public class Marbles : MonoBehaviour
     
     public void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && !isHit)
         {
+            isHit = true; 
             StartCoroutine(Collect());
+            
         }
     }
 
     public IEnumerator Collect()
     {
-        yield return new WaitForSeconds(1);
+        gameController.Marbles++;
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 }

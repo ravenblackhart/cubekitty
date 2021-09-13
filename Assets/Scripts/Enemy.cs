@@ -6,9 +6,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Rigidbody rigidBody;
+    private GameController gameController;
+
+    private bool isHit = false;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
     
     void FixedUpdate()
@@ -36,9 +40,25 @@ public class Enemy : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && !isHit)
         {
-            
+            isHit = true;
+            StartCoroutine(Attacking());
+
         }
+
+        else
+        {
+            StopCoroutine(Attacking());
+        }
+        
+        
+    }
+
+    IEnumerator Attacking()
+    {
+        gameController.HealthPoints--;
+        yield return new WaitForSeconds(0.3f);
+        isHit = false;
     }
 }

@@ -23,9 +23,10 @@ public class PlayerController : MonoBehaviour
 
     //Private Declarations
     private bool isMoving;
+    private bool isAttacking = false;
     private Marbles marbles;
 
-    public bool isFaceUp;
+    
 
     #endregion
     
@@ -47,25 +48,28 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Roll(newAnchor, rotAxis ));
             if (transform.rotation.x == 0 && transform.rotation.z == 0)
             {
-                isFaceUp = true;
+                
                 Debug.Log("mia!");
             }
 
             else
             {
-                isFaceUp = false;
+                
             }
         }
 
-        //else if (Attack.triggered) OnAttack();
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !isAttacking) StartCoroutine(OnAttack());
 
        
 
     }
 
-    void OnAttack()
+    IEnumerator OnAttack()
     {
-        
+        isAttacking = true;
+        Debug.Log("Meow!");
+        yield return new WaitForSeconds(0.3f);
+        isAttacking = false;
     }
 
     IEnumerator Roll(Vector3 newAnchor, Vector3 rotAxis)
