@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour
@@ -13,7 +15,8 @@ public class PlayerController : MonoBehaviour
     public int Marbles = 5;
 
     [Header("Movement")]
-    [SerializeField] private float rollSpeed = 1f;
+    [SerializeField] private float rollSpeed = 3f;
+    [SerializeField] private float fallSpeed = 3f;
   
     #endregion
 
@@ -26,14 +29,24 @@ public class PlayerController : MonoBehaviour
     private Marbles marbles;
 
     private RaycastHit Catcher;
+    private RaycastHit Grounder;
+
+    private Rigidbody rigidBody;
+    
     private float timeDelay = 0.3f;
     
 
     #endregion
-    
+
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
 
     void FixedUpdate()
     {
+        
+        
         if (isMoving) return;
         
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.left);
@@ -62,12 +75,27 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Can't Attack");
             }
         }
+        
 
-        if (HealthPoints == 0)
+
+
+    }
+
+    void CheckGround()
+    {
+        int groundMask = 1 << 7;
+
+        if (!Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask))
         {
-            Destroy(playerPrefab);
+            rigidBody.useGravity = true;
+            rigidBody.AddForce(Vector3.down*fallSpeed, ForceMode.Acceleration);
+            if (transform.position.y < -1)
+            {
+                Destroy(playerPrefab);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            
         }
-
     }
 
     IEnumerator Roll(Vector3 newAnchor, Vector3 rotAxis)
@@ -78,15 +106,17 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(newAnchor,rotAxis, rollSpeed);
             yield return new WaitForSeconds(0.01f);
         }
+        
+        CheckGround();
 
         isMoving = false;
     }
     
     void OnAttack()
     {
-        int layerMask = 1 << 6;
+        int enemyMask = 1 << 6;
 
-        if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, layerMask))
+        if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, enemyMask))
         {
             Destroy(Catcher.transform.gameObject);
         }
