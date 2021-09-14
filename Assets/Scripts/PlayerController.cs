@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private Marbles marbles;
 
+    private RaycastHit Catcher;
     
 
     #endregion
@@ -100,7 +101,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator OnAttack()
     {
         isAttacking = true;
-        Debug.Log("Meow!");
+        int layerMask = 1 << 6;
+
+        if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1f, layerMask))
+        {
+            Destroy(Catcher.transform.gameObject);
+        }
         yield return new WaitForSeconds(0.3f);
         isAttacking = false;
     }

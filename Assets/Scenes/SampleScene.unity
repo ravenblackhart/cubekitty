@@ -393,6 +393,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109462966}
   m_CullTransparentMesh: 1
+--- !u!1 &337961788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6386382201071971509, guid: da2f2052957f31545a31990fdfe693e9, type: 3}
+  m_PrefabInstance: {fileID: 6386382200081664788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &337961794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6386382201071971505, guid: da2f2052957f31545a31990fdfe693e9, type: 3}
@@ -2850,10 +2855,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed603858fe4c2404db3114d2de6c7f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
-  rollSpeed: 3
+  playerPrefab: {fileID: 337961788}
   HealthPoints: 5
   Marbles: 5
+  rollSpeed: 3
 --- !u!1 &1696031604
 GameObject:
   m_ObjectHideFlags: 0
