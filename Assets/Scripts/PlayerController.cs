@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     //Private Declarations
     private bool isMoving;
-    private bool isAttacking = false;
     private Marbles marbles;
 
     private RaycastHit Catcher;
@@ -61,7 +60,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Debug.Log("Can't Attack");
-                isAttacking = false;
             }
         }
 
@@ -86,15 +84,12 @@ public class PlayerController : MonoBehaviour
     
     void OnAttack()
     {
-        isAttacking = true;
         int layerMask = 1 << 6;
 
         if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, layerMask))
         {
             Destroy(Catcher.transform.gameObject);
         }
-        timeDelay -= Time.deltaTime;
-        if (timeDelay < 0) isAttacking = false;
     }
   
 }

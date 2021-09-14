@@ -11,8 +11,7 @@ using UnityEngine.XR;
 
 public class UIController : MonoBehaviour
 {
-    #region GUI
-
+    //Inspector Access
     [Header("HUD Components")] 
     public TextMeshProUGUI HealthCounter;
     public TextMeshProUGUI MarblesCounter;
@@ -28,25 +27,9 @@ public class UIController : MonoBehaviour
 
     [SerializeField] public GameObject PauseMenu;
     [SerializeField] public GameObject GameOverMenu;
-    
-    #endregion
 
-    #region Other Declaration
-
+    //Other Declarations
     private PlayerController playerController;
-
-
-    #endregion
-    // private void Awake()
-    // {
-    //     GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
-    //     if (objs.Length > 1)
-    //     {
-    //         Destroy(this.gameObject);
-    //     }
-    //     
-    //     DontDestroyOnLoad(gameObject);
-    // }
 
     void Start()
     {
