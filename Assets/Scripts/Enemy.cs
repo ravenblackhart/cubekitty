@@ -17,7 +17,10 @@ public class Enemy : MonoBehaviour
     
     void FixedUpdate()
     {
+
         EnemyPatrol();
+        
+        
     }
 
     void EnemyPatrol()
