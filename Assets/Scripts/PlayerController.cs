@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rigidBody;
     
-    private float timeDelay = 0.3f;
+    private float timeDelay = 2f;
     
 
     #endregion
@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour
         
         if (isMoving) return;
         
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.left);
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) OnMove(Vector3.right);
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) OnMove(Vector3.forward);
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) OnMove(Vector3.back);
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.forward);
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) OnMove(Vector3.back);
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) OnMove(Vector3.right);
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) OnMove(Vector3.left);
 
         
         void OnMove(Vector3 moveDirection)
@@ -61,19 +61,16 @@ public class PlayerController : MonoBehaviour
             var rotAxis = Vector3.Cross(Vector3.up, moveDirection);
             StartCoroutine(Roll(newAnchor, rotAxis ));
         }
+        
+        CheckGround();
 
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(2))
         {
             if (playerPrefab.transform.up == Vector3.up )
             {
-                Debug.Log("Mia! You ded!");
                 OnAttack();
             }
 
-            else
-            {
-                Debug.Log("Can't Attack");
-            }
         }
         
 
@@ -88,8 +85,7 @@ public class PlayerController : MonoBehaviour
         if (!Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask))
         {
             rigidBody.useGravity = true;
-            rigidBody.AddForce(Vector3.down*fallSpeed, ForceMode.Acceleration);
-            if (transform.position.y < -1)
+            if (transform.position.y < -2)
             {
                 Destroy(playerPrefab);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -106,9 +102,6 @@ public class PlayerController : MonoBehaviour
             transform.RotateAround(newAnchor,rotAxis, rollSpeed);
             yield return new WaitForSeconds(0.01f);
         }
-        
-        CheckGround();
-
         isMoving = false;
     }
     
