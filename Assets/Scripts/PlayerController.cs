@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             if (playerPrefab.transform.up == Vector3.up )
             {
                 Debug.Log("Mia! You ded!");
-                StartCoroutine(OnAttack());
+                OnAttack();
             }
 
             else
@@ -67,8 +67,7 @@ public class PlayerController : MonoBehaviour
 
         if (HealthPoints == 0)
         {
-            timeDelay -= Time.deltaTime;
-            if (timeDelay < 0) Destroy(playerPrefab);
+            Destroy(playerPrefab);
         }
 
     }
@@ -85,7 +84,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
     
-    IEnumerator OnAttack()
+    void OnAttack()
     {
         isAttacking = true;
         int layerMask = 1 << 6;
@@ -94,8 +93,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(Catcher.transform.gameObject);
         }
-        yield return new WaitForSeconds(0.3f);
-        isAttacking = false;
+        timeDelay -= Time.deltaTime;
+        if (timeDelay < 0) isAttacking = false;
     }
   
 }
