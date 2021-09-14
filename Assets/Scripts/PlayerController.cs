@@ -14,13 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float rollSpeed = 1f;
-    
-    
-    
-    
-
-    
-
+  
     #endregion
 
     #region Other Declarations
@@ -33,8 +27,7 @@ public class PlayerController : MonoBehaviour
     private Marbles marbles;
 
     private RaycastHit Catcher;
-
-    private float timeDelay ;
+    private float timeDelay = 0.3f;
     
 
     #endregion
@@ -55,22 +48,13 @@ public class PlayerController : MonoBehaviour
             var newAnchor = transform.position + (Vector3.down + moveDirection) * 0.5f;
             var rotAxis = Vector3.Cross(Vector3.up, moveDirection);
             StartCoroutine(Roll(newAnchor, rotAxis ));
-            if (transform.rotation.x == 0 && transform.rotation.z == 0)
-            {
-                
-                Debug.Log("mia!");
-            }
-
-            else
-            {
-                
-            }
         }
 
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(2))
         {
             if (playerPrefab.transform.up == Vector3.up )
             {
+                Debug.Log("Mia! You ded!");
                 StartCoroutine(OnAttack());
             }
 
@@ -83,7 +67,8 @@ public class PlayerController : MonoBehaviour
 
         if (HealthPoints == 0)
         {
-            Destroy(playerPrefab);
+            timeDelay -= Time.deltaTime;
+            if (timeDelay < 0) Destroy(playerPrefab);
         }
 
     }
@@ -105,20 +90,12 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         int layerMask = 1 << 6;
 
-        if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1f, layerMask))
+        if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, layerMask))
         {
             Destroy(Catcher.transform.gameObject);
         }
         yield return new WaitForSeconds(0.3f);
         isAttacking = false;
     }
-
-    IEnumerator OnDead()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(playerPrefab);
-    }
-
-    
-
+  
 }
