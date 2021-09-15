@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Marble
   - Donut
+  - UIController
   layers:
   - Default
   - TransparentFX

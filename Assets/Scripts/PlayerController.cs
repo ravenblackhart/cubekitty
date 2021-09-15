@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float rollSpeed = 3f;
-    [SerializeField] private float fallSpeed = 3f;
   
     #endregion
 
@@ -27,20 +26,21 @@ public class PlayerController : MonoBehaviour
     //Private Declarations
     private bool isMoving;
     private Marbles marbles;
+    private UIManager uiManager;
 
     private RaycastHit Catcher;
     private RaycastHit Grounder;
 
     private Rigidbody rigidBody;
-    
-    private float timeDelay = 2f;
-    
+
+
 
     #endregion
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
     }
 
     void FixedUpdate()
@@ -72,8 +72,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        
-
 
 
     }
@@ -84,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
         if (!Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask))
         {
+            rigidBody.isKinematic = false;
             rigidBody.useGravity = true;
             if (transform.position.y < -2)
             {
@@ -91,6 +90,11 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             
+        }
+        
+        else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && Grounder.transform.tag == "Finish")
+        {
+            uiManager.NextLevelMenu.enabled = true;
         }
     }
 
