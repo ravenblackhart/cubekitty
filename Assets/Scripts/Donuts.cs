@@ -8,12 +8,14 @@ public class Donuts : MonoBehaviour
 {
 
     private PlayerController playerController;
+    private LevelManager levelManager;
 
     private bool isHit = false;
 
     private void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     public void OnCollisionEnter(Collision other)
@@ -22,6 +24,7 @@ public class Donuts : MonoBehaviour
         {
             isHit = true;
             playerController.HealthPoints++;
+            levelManager.donutsCollected++;
             Destroy(gameObject);
 
         }

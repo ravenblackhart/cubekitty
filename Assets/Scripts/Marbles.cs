@@ -13,6 +13,7 @@ public class Marbles : MonoBehaviour
 
     private Rigidbody rigidBody;
     private PlayerController playerController;
+    private LevelManager levelManager;
 
     private bool isHit = false;
 
@@ -21,6 +22,7 @@ public class Marbles : MonoBehaviour
         Offset = Random.Range(0.1f,0.3f);
         rigidBody = GetComponent<Rigidbody>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     void FixedUpdate()
@@ -52,13 +54,13 @@ public class Marbles : MonoBehaviour
         {
             isHit = true; 
             StartCoroutine(Collect());
-            
         }
     }
 
     public IEnumerator Collect()
     {
         playerController.Marbles++;
+        levelManager.marblesCollected++;
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }

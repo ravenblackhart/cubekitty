@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject uiManager;
     [SerializeField] private GameObject player;
+    
     
     
     void Awake()
@@ -43,18 +45,33 @@ public class GameManager : MonoBehaviour
         #endregion
 
         #region PlayerController
-        
-        GameObject[] mpc = GameObject.FindGameObjectsWithTag("Player");
-        if (mpc.Length > 1)
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            for (int i = 1; i < mpc.Length; i++)
+            GameObject[] mpc = GameObject.FindGameObjectsWithTag("Player");
+            if (mpc.Length > 1)
             {
-                Destroy(mpc[i]);
+                for (int i = 1; i < mpc.Length; i++)
+                {
+                    Destroy(mpc[i]);
+                }
+            }
+            else if (mpc.Length < 1)
+            {
+                Instantiate(player);
             }
         }
-        else if (mpc.Length < 1)
+        #endregion
+
+        #region LevelManager
+
+        GameObject[] lm = GameObject.FindGameObjectsWithTag("LevelManager");
+        if (lm.Length > 1)
         {
-            Instantiate(player);
+            for (int i = 1; i < lm.Length; i++)
+            {
+                Destroy(lm[i]);
+            }
         }
 
         #endregion

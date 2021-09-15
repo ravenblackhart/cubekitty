@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviour
     #region Other Declarations
     
     //Public Declarations
+    public bool isFinished = false;
 
     //Private Declarations
     private bool isMoving;
     private Marbles marbles;
     private UIManager uiManager;
+    private LevelManager levelManager;
 
     private RaycastHit Catcher;
     private RaycastHit Grounder;
@@ -96,8 +98,14 @@ public class PlayerController : MonoBehaviour
         
         else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && Grounder.transform.tag == "Finish")
         {
-            uiManager.NextLevelMenu.enabled = true;
+            isFinished = true;
+            //uiManager.NextLevelMenu.enabled = true;
 
+        }
+
+        else
+        {
+            isFinished = false;
         }
     }
 
@@ -118,6 +126,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, enemyMask))
         {
+            levelManager.enemiesScared++;
             Destroy(Catcher.transform.gameObject);
         }
     }
