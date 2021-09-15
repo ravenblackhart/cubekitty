@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
         
         void OnMove(Vector3 moveDirection)
         {
+            if (uiManager.NextLevelMenu.enabled) return;
+            
             var newAnchor = transform.position + (Vector3.down + moveDirection) * 0.5f;
             var rotAxis = Vector3.Cross(Vector3.up, moveDirection);
             StartCoroutine(Roll(newAnchor, rotAxis ));
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
         else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && Grounder.transform.tag == "Finish")
         {
             uiManager.NextLevelMenu.enabled = true;
+
         }
     }
 
