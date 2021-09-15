@@ -430,6 +430,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2839462643512874910, guid: 13d582c4c2e124d4e9b8617ee1435d4c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8687311111107066008}
+    - target: {fileID: 2839462643512874910, guid: 13d582c4c2e124d4e9b8617ee1435d4c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13d582c4c2e124d4e9b8617ee1435d4c, type: 3}
 --- !u!224 &8290275300148223106 stripped

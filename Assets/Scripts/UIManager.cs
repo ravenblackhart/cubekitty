@@ -49,18 +49,14 @@ public class UIManager : MonoBehaviour
 
    public void PauseGame()
    {
-       if (!PauseMenu.enabled)
+       if (!PauseMenu.enabled && !NextLevelMenu.enabled)
        {
-           Debug.Log("Pausing");
            PauseMenu.enabled = true;
            Time.timeScale = 0.0f;
        }
 
-       else if (PauseMenu.enabled)
-       {
-           Debug.Log("Resuming");
-          ResumeGame();
-       }
+       else if (PauseMenu.enabled) ResumeGame();
+       
    }
 
     public void ResumeGame()
@@ -69,20 +65,9 @@ public class UIManager : MonoBehaviour
        Time.timeScale = 1.0f;
    }
 
-   public void MainMenu()
-   {
-       SceneManager.LoadScene("MainMenu");
-   }
-
-   public void RestartLevel()
-   {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-   }
-
-   public void NextLevel()
-   {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-   }
+   public void MainMenu() => SceneManager.LoadScene("MainMenu");
+   public void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+   public void NextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
    #endregion
     

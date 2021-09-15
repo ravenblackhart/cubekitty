@@ -7,6 +7,8 @@ TagManager:
   - Marble
   - Donut
   - UIController
+  - LevelManager
+  - Enemy
   layers:
   - Default
   - TransparentFX
