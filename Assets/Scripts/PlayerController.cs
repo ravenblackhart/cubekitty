@@ -96,15 +96,16 @@ public class PlayerController : MonoBehaviour
             
         }
         
-        else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && Grounder.transform.tag == "Finish")
-        {
+        else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && 
+                 Grounder.transform.tag == "Finish") 
             isFinished = true;
-            //uiManager.NextLevelMenu.enabled = true;
-
-        }
+        
+        
 
         else
         {
+            rigidBody.isKinematic = true;
+            rigidBody.useGravity = false;
             isFinished = false;
         }
     }
