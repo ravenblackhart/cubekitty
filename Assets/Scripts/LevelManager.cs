@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
@@ -20,19 +22,29 @@ public class LevelManager : MonoBehaviour
     public bool GoalAchieved = false;
     private PlayerController playerController;
     private UIManager uiManager;
+    private GameManager gameManager;
 
     public int marblesCollected;
     public int donutsCollected;
     public int enemiesScared;
 
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
+    }
+
     void Start()
     {
+        int s = Random.Range(0, gameManager.Skybox.Length);
+        RenderSettings.skybox = gameManager.Skybox[s];
+        
         GameObject[] marbles = GameObject.FindGameObjectsWithTag("Marble");
         GameObject[] donuts = GameObject.FindGameObjectsWithTag("Donut");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
+        
         
         
         Debug.Log($"{marbles.Length} marbles & {donuts.Length} donuts found. There were {enemies.Length} silly doggos ");

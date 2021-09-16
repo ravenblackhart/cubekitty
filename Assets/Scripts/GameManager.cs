@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject uiManager;
     [SerializeField] private GameObject player;
+
+    [SerializeField] public Material[] Skybox;
     
     
     
@@ -28,20 +30,24 @@ public class GameManager : MonoBehaviour
         {
             var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
         }
-        
-        GameObject[] mui = GameObject.FindGameObjectsWithTag("UIController");
-        if (mui.Length > 1)
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            for (int i = 1; i < mui.Length; i++)
+            GameObject[] mui = GameObject.FindGameObjectsWithTag("UIController");
+            if (mui.Length > 1)
             {
-                Destroy(mui[i]);
+                for (int i = 1; i < mui.Length; i++)
+                {
+                    Destroy(mui[i]);
+                }
+            }
+        
+            else if (mui.Length < 1)
+            {
+                Instantiate(uiManager);
             }
         }
-        
-        else if (mui.Length < 1)
-        {
-            Instantiate(uiManager);
-        }
+       
         #endregion
 
         #region PlayerController
@@ -78,9 +84,4 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        
-        
-    }
 }
