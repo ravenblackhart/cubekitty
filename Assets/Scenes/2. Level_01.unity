@@ -4713,6 +4713,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3150537848011325727, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698018176103969737, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7577997718247600882, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.7529412
@@ -4724,6 +4732,18 @@ PrefabInstance:
     - target: {fileID: 7577997718247600882, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
       value: 0.6320754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290275300148223105, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687311111107066008, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: xOffset
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687311111107066008, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: yOffset
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8687311111107066009, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
       propertyPath: m_RootOrder
@@ -4772,6 +4792,10 @@ PrefabInstance:
     - target: {fileID: 8687311111107066011, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
       propertyPath: m_Name
       value: UIController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8687311111677046629, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
@@ -4958,9 +4982,9 @@ Transform:
   - {fileID: 663161646}
   - {fileID: 818341483}
   - {fileID: 593163755}
+  - {fileID: 743274080}
   - {fileID: 2375271}
   - {fileID: 1513107433}
-  - {fileID: 743274080}
   - {fileID: 423532113}
   - {fileID: 598038308}
   - {fileID: 1461901816}
@@ -8108,6 +8132,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0.7853981
+      objectReference: {fileID: 0}
+    - target: {fileID: 706862345813607121, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8330200954345101505, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
       propertyPath: m_Name
       value: Player

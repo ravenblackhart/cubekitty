@@ -20,13 +20,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Canvas HUD;
     [SerializeField] public Canvas PauseMenu;
     [SerializeField] public Canvas NextLevelMenu;
-    [SerializeField] public Canvas CharacterUI;
     [SerializeField] public TextMeshProUGUI AttackVox;
+
+    [Header("Positioning")] 
+    [SerializeField] private float xOffset; 
+    [SerializeField] private float yOffset; 
 
     //Other Declarations
     private PlayerController playerController;
-    private Transform anchor;
-    private RectTransform CharacterUIRect;
+    private Transform anchorRef;
+    private Vector2 anchorPos;
+    private RectTransform HUDRect;
     private RectTransform AttackVoxRect;
 
     
@@ -36,9 +40,10 @@ public class UIManager : MonoBehaviour
         PauseMenu.enabled = false;
         NextLevelMenu.enabled = false;
         HUD.enabled = true;
+        AttackVox.enabled = false;
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        anchor = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        CharacterUIRect = CharacterUI.GetComponent<RectTransform>();
+        anchorRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        HUDRect = HUD.GetComponent<RectTransform>();
         AttackVoxRect = AttackVox.GetComponent<RectTransform>();
 
     }
@@ -58,8 +63,9 @@ public class UIManager : MonoBehaviour
 
    void CharUI()
    {
-       Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, anchor.position);
-       AttackVoxRect.anchoredPosition = screenPoint - CharacterUIRect.sizeDelta / 2f;
+       Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, anchorRef.position);
+       anchorPos = new Vector2(screenPoint.x - xOffset , screenPoint.y - yOffset);
+       AttackVox.transform.position = anchorPos;
    }
 
    #endregion

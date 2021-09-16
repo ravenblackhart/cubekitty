@@ -85,11 +85,14 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (Input.GetKeyUp(KeyCode.Space) && uiManager.AttackVox.enabled) uiManager.AttackVox.enabled = false;
+
         if (playerPrefab == null)
         {
             restartDelay -= 1f;
             if (restartDelay < 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        
 
     }
 
@@ -131,13 +134,13 @@ public class PlayerController : MonoBehaviour
     
     void OnAttack()
     {
+        uiManager.AttackVox.enabled = true;
         int enemyMask = 1 << 6;
 
         if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, enemyMask))
         {
             levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
             levelManager.enemiesScared++;
-            
             Destroy(Catcher.transform.gameObject);
         }
     }
