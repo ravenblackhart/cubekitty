@@ -47,8 +47,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        
         if (isMoving) return;
         
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.forward);
@@ -129,6 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
             levelManager.enemiesScared++;
+            
             Destroy(Catcher.transform.gameObject);
         }
     }
