@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(particle.isPlaying) Destroy(playerPrefab);
         if (isMoving) return;

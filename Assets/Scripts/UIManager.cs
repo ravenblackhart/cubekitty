@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
        Time.timeScale = 1.0f;
    }
 
-   public void MainMenu() => SceneManager.LoadScene("MainMenu");
+   public void MainMenu() => SceneManager.LoadScene("0_MainMenu");
    public void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
    public void NextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
