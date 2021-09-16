@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, enemyMask))
         {
+            levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
             levelManager.enemiesScared++;
             Destroy(Catcher.transform.gameObject);
         }
