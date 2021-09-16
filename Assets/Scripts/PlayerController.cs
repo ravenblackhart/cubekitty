@@ -34,10 +34,19 @@ public class PlayerController : MonoBehaviour
     private RaycastHit Grounder;
 
     private Rigidbody rigidBody;
+    private ParticleSystem particle;
+
+    private float restartDelay = 25f;
 
 
 
     #endregion
+
+    private void Awake()
+    {
+        particle = gameObject.GetComponent<ParticleSystem>();
+        if (particle.isPlaying) particle.Pause(true);
+    }
 
     private void Start()
     {
@@ -47,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(particle.isPlaying) Destroy(playerPrefab);
         if (isMoving) return;
         
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.forward);
@@ -75,6 +85,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (playerPrefab == null)
+        {
+            restartDelay -= 1f;
+            if (restartDelay < 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
     }
 
@@ -86,12 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.isKinematic = false;
             rigidBody.useGravity = true;
-            if (transform.position.y < -2)
-            {
-                Destroy(playerPrefab);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-            
+            if (transform.position.y < -1) particle.Play(true);
         }
         
         else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && 
