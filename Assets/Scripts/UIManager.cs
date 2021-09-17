@@ -34,6 +34,11 @@ public class UIManager : MonoBehaviour
         HUD.enabled = true;
     }
 
+    private void Update()
+    {
+        HideHUD();
+    }
+
     #region In-Game Menu Actions
 
    public void PauseGame()
@@ -54,10 +59,22 @@ public class UIManager : MonoBehaviour
        Time.timeScale = 1.0f;
    }
 
-   public void MainMenu() => SceneManager.LoadScene("0_MainMenu");
+    public void MainMenu() => SceneManager.LoadScene("0_MainMenu");
    public void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
    public void NextLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
    #endregion
-    
+
+   public void HideHUD()
+   {
+       if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().name == "0_MainMenu")
+       {
+           HUD.enabled = false;
+       }
+   }
+
+   public void QuitGame()
+   {
+       Application.Quit();
+   }
 }

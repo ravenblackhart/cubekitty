@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
                 CharUI.enabled = true;
                 OnAttack();
             }
-
         }
 
         if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(2)) && CharUI.enabled) CharUI.enabled = false;
@@ -100,8 +99,6 @@ public class PlayerController : MonoBehaviour
             restartDelay -= 1f;
             if (restartDelay < 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        
-
     }
 
     void CheckGround()
@@ -112,14 +109,14 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.isKinematic = false;
             rigidBody.useGravity = true;
+            if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().name == "0_MainMenu") uiManager.QuitGame();
             if (transform.position.y < -1) particle.Play(true);
+            
         }
         
         else if (Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask) && 
                  Grounder.transform.tag == "Finish") 
             isFinished = true;
-        
-        
 
         else
         {

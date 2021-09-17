@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -78,9 +79,14 @@ public class LevelManager : MonoBehaviour
     }
     public void CheckLevelCleared()
     {
-        if (GoalAchieved && playerController.isFinished)
+        if ((SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().name == "0_MainMenu")
+            && playerController.isFinished) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        else if (GoalAchieved && playerController.isFinished)
         {
             uiManager.NextLevelMenu.enabled = true;
         }
     }
+    
+    
 }
