@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public Canvas HUD;
     [SerializeField] public Canvas PauseMenu;
     [SerializeField] public Canvas NextLevelMenu;
-    [SerializeField] public TextMeshProUGUI AttackVox;
 
     [Header("Positioning")] 
     [SerializeField] private float xOffset; 
@@ -28,10 +27,8 @@ public class UIManager : MonoBehaviour
 
     //Other Declarations
     private PlayerController playerController;
-    private Transform anchorRef;
-    private Vector2 anchorPos;
-    private RectTransform HUDRect;
-    private RectTransform AttackVoxRect;
+
+
 
     
     void Start()
@@ -40,35 +37,15 @@ public class UIManager : MonoBehaviour
         PauseMenu.enabled = false;
         NextLevelMenu.enabled = false;
         HUD.enabled = true;
-        AttackVox.enabled = false;
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        anchorRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        HUDRect = HUD.GetComponent<RectTransform>();
-        AttackVoxRect = AttackVox.GetComponent<RectTransform>();
 
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
    void Update()
     {
         HealthCounter.text = playerController.HealthPoints.ToString();
         MarblesCounter.text = playerController.Marbles.ToString();
-
-       CharUI();
-
-
-
     }
-
-   #region CharacterUI
-
-   void CharUI()
-   {
-       Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, anchorRef.position);
-       anchorPos = new Vector2(screenPoint.x - xOffset , screenPoint.y - yOffset);
-       AttackVox.transform.position = anchorPos;
-   }
-
-   #endregion
 
    #region In-Game Menu Actions
 

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d6e7c188270224faea3ce6d84dd261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 8687311111107066011, guid: 5ec86d9dc09741b4db1cb1e6b8f4bae1, type: 3}
+  uiManager: {fileID: 0}
   player: {fileID: 8330200954345101505, guid: ddb1b5f198c9c09458d9a6820481766a, type: 3}
   Skybox:
   - {fileID: 2100000, guid: 9aa8ed67591432941bb76f12eb23ff91, type: 2}

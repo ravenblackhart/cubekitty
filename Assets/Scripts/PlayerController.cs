@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     #region Inspector
 
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Canvas CharUI;
     public int HealthPoints = 5;
     public int Marbles = 5;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private Marbles marbles;
     private UIManager uiManager;
     private LevelManager levelManager;
+    
 
     private RaycastHit Catcher;
     private RaycastHit Grounder;
@@ -52,17 +54,21 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
+        CharUI.enabled = false;
+
     }
 
     void Update()
     {
         if(particle.isPlaying) Destroy(playerPrefab);
         if (isMoving) return;
-        
+
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) OnMove(Vector3.forward);
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) OnMove(Vector3.back);
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) OnMove(Vector3.right);
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) OnMove(Vector3.left);
+
+        if (Input.GetKeyDown(KeyCode.Escape)) uiManager.PauseGame();
 
         
         void OnMove(Vector3 moveDirection)
@@ -80,12 +86,14 @@ public class PlayerController : MonoBehaviour
         {
             if (playerPrefab.transform.up == Vector3.up )
             {
+                CharUI.transform.rotation = Quaternion.Euler(0, 90, 0);
+                CharUI.enabled = true;
                 OnAttack();
             }
 
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && uiManager.AttackVox.enabled) uiManager.AttackVox.enabled = false;
+        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(2)) && CharUI.enabled) CharUI.enabled = false;
 
         if (playerPrefab == null)
         {
@@ -134,7 +142,6 @@ public class PlayerController : MonoBehaviour
     
     void OnAttack()
     {
-        uiManager.AttackVox.enabled = true;
         int enemyMask = 1 << 6;
 
         if (Physics.Raycast(playerPrefab.transform.position, playerPrefab.transform.TransformDirection(Vector3.back), out Catcher, 1.5f, enemyMask))
