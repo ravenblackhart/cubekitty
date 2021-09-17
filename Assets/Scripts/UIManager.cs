@@ -12,9 +12,8 @@ using UnityEngine.XR;
 public class UIManager : MonoBehaviour
 {
     //Inspector Access
-    [Header("HUD Components")] 
-    public TextMeshProUGUI HealthCounter;
-    public TextMeshProUGUI MarblesCounter;
+    [Header("HUD Components")]
+    public TextMeshProUGUI ObjectivesText;
 
     [Header("Menus & Displays")] 
     [SerializeField] public Canvas HUD;
@@ -26,28 +25,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float yOffset; 
 
     //Other Declarations
-    private PlayerController playerController;
 
-
-
-    
     void Start()
     {
         Time.timeScale = 1.0f;
         PauseMenu.enabled = false;
         NextLevelMenu.enabled = false;
         HUD.enabled = true;
-
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-   void Update()
-    {
-        HealthCounter.text = playerController.HealthPoints.ToString();
-        MarblesCounter.text = playerController.Marbles.ToString();
-    }
-
-   #region In-Game Menu Actions
+    #region In-Game Menu Actions
 
    public void PauseGame()
    {

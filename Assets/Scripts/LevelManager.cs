@@ -28,6 +28,11 @@ public class LevelManager : MonoBehaviour
     public int donutsCollected;
     public int enemiesScared;
 
+    private int marblesLeft;
+    private int donutsLeft;
+    private int enemiesLeft;
+    
+
     private void Awake()
     {
         gameManager = GameObject.Find("GameController").GetComponent<GameManager>();
@@ -44,10 +49,9 @@ public class LevelManager : MonoBehaviour
         GameObject[] donuts = GameObject.FindGameObjectsWithTag("Donut");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+
+        uiManager.ObjectivesText.text = $"Collect {MarblesToCollect} Marbles, Scare {EnemiesToScare} Enemies";
         
-        
-        
-        Debug.Log($"{marbles.Length} marbles & {donuts.Length} donuts found. There were {enemies.Length} silly doggos ");
     }
 
     // Update is called once per frame
@@ -59,15 +63,18 @@ public class LevelManager : MonoBehaviour
 
     void CheckGoals()
     {
-        int marblesLeft = MarblesToCollect - marblesCollected;
-        int donutsLeft = DonutsToCollect - donutsCollected;
-        int enemiesLeft = EnemiesToScare - enemiesScared;
+        marblesLeft = MarblesToCollect - marblesCollected;
+        donutsLeft = DonutsToCollect - donutsCollected;
+        enemiesLeft = EnemiesToScare - enemiesScared;
 
-        if (marblesLeft <= 0 && donutsLeft <= 0 && enemiesLeft <= 0) GoalAchieved = true;
-        else
+        if (marblesLeft <= 0 && donutsLeft <= 0 && enemiesLeft <= 0)
         {
-            Debug.Log($"{marblesLeft} marbles, {donutsLeft} donuts & {enemiesLeft} doggos to go!");
+            GoalAchieved = true;
+            uiManager.ObjectivesText.text = $"Get to the Goal";
         }
+        
+        else uiManager.ObjectivesText.text = $"Collect {marblesLeft} more Marbles, Scare {enemiesLeft} more Enemies";
+        
     }
     public void CheckLevelCleared()
     {

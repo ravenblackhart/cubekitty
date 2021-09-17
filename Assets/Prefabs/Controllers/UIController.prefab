@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5938285139718977726}
   - component: {fileID: 5938285139718977727}
   m_Layer: 0
-  m_Name: UIController 1
+  m_Name: UIController
   m_TagString: UIController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,12 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8157d6e11e7d3914b89f729163f752bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthCounter: {fileID: 5938285138951410480}
-  MarblesCounter: {fileID: 5938285139950852155}
+  ObjectivesText: {fileID: 5938285139950852155}
   HUD: {fileID: 5938285140545344967}
   PauseMenu: {fileID: 5938285138946912070}
   NextLevelMenu: {fileID: 6479123801073163434}
-  AttackVox: {fileID: 0}
   xOffset: 0
   yOffset: 0
 --- !u!1001 &3786612156268337112
@@ -63,7 +61,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4102500366085453468, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102500366085453468, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102500366085453468, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -255
       objectReference: {fileID: 0}
     - target: {fileID: 4102500366085453471, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -72,6 +78,46 @@ PrefabInstance:
     - target: {fileID: 4102500366085453471, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247010168800, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 531.3969
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247010168800, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 303.79126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247010168800, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247010168801, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_Name
+      value: Objective
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247010168803, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_text
+      value: Marbles, Donuts, Enemies
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247300107896, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_Name
+      value: Goal
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247300107898, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_text
+      value: 'Goal : '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247300107899, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 170.2109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247300107899, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -248.89456
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414536247300107899, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7414536247485612570, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
       propertyPath: m_Name
@@ -177,17 +223,6 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 7414536247485612575, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
   m_PrefabInstance: {fileID: 3786612156268337112}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5938285138951410480 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7414536245891745000, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
-  m_PrefabInstance: {fileID: 3786612156268337112}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5938285139950852155 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7414536247010168803, guid: dfbefecbe2f50c645adbfd8394460b80, type: 3}
