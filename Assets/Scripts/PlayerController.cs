@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem particle;
 
     private float restartDelay = 25f;
+    private int groundMask = 1 << 7;
 
 
 
@@ -55,7 +56,6 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         uiManager = GameObject.Find("UIController").GetComponent<UIManager>();
         CharUI.enabled = false;
-
     }
 
     void Update()
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(2))
         {
-            if (playerPrefab.transform.up == Vector3.up )
+            if (Physics.Raycast(transform.position, -transform.up, out Grounder, 0.6f, groundMask))
             {
                 CharUI.transform.rotation = Quaternion.Euler(0, 90, 0);
                 CharUI.enabled = true;
@@ -103,7 +103,6 @@ public class PlayerController : MonoBehaviour
 
     void CheckGround()
     {
-        int groundMask = 1 << 7;
 
         if (!Physics.Raycast(transform.position, (Vector3.down), out Grounder, 0.6f, groundMask))
         {
